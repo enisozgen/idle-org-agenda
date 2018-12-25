@@ -1,4 +1,4 @@
-;;; idle-org-agenda.el --- A package that shows your agenda when Emacs is idle
+;;; idle-org-agenda.el --- Shows your agenda when editor is idle.
 
 ;; Copyright (C) 2010 John Wiegley
 
@@ -38,7 +38,7 @@
 ;;; Code:
 
 (eval-when-compile
-  (require 'cl))
+  (require 'cl-libify))
 (require 'org-agenda)
 
 (defgroup idle-org nil
@@ -46,17 +46,17 @@
   :group 'org-agenda)
 
 (defcustom idle-org-agenda-interval 300
-  "Period of idle time period to run functions"
+  "Period of idle time period to run functions."
   :type 'integer
   :group 'idle-org-agenda)
 
 (defcustom idle-org-agenda-key "a"
-  "org-agenda key to choose spesific agenda"
+  "Org-agenda key to choose spesific agenda."
   :type 'string
   :group 'idle-org-agenda)
 
-(defun jump-to-idle-org-agenda ()
-  "Main functions shows your defined agenda"
+(defun idle-org-agenda--jump-to-agenda ()
+  "Main functions show your defined agenda."
   (let ((buf (get-buffer org-agenda-buffer-name))
         wind)
     (if buf
@@ -70,25 +70,26 @@
               (org-fit-window-to-buffer))))
       (org-agenda nil idle-org-agenda-key))))
 
-(defun stop-idle-org-agenda ()
-  "Start idle-org-agenda"
-  (cancel-function-timers 'jump-to-idle-org-agenda))
+(defun idle-org-agenda--stop ()
+  "Start idle-org-agenda."
+  (cancel-function-timers 'idle-org-agenda--jump-to-agenda))
 
-(defun start-idle-org-agenda ()
-  "Stop idle-org-agenda"
-  (run-with-idle-timer idle-org-agenda-interval  t 'jump-to-idle-org-agenda))
+(defun idle-org-agenda--start ()
+  "Stop idle-org-agenda."
+  (run-with-idle-timer idle-org-agenda-interval  t 'idle-org-agenda--jump-to-agenda))
 
 (define-minor-mode idle-org-agenda-mode
   "Toggle `idle-org-agenda-mode'
 
-When it active. If you don't touch emacs, after certain time emacs will show
+When it's enabled. If you don't touch emacs, after certain time emacs will show
 your org-agenda"
   nil
   :lighter ""
   :global t
+  :require 'idle-org-agenda
   (if idle-org-agenda-mode
-      (start-idle-org-agenda)
-    (stop-idle-org-agenda)))
+      (idle-org-agenda--start)
+    (idle-org-agenda--stop)))
 
 
 (provide 'idle-org-agenda)
