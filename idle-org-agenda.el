@@ -71,11 +71,11 @@
       (org-agenda nil idle-org-agenda-key))))
 
 (defun idle-org-agenda--stop ()
-  "Start idle-org-agenda."
+  "Stop idle-org-agenda."
   (cancel-function-timers 'idle-org-agenda--jump-to-agenda))
 
 (defun idle-org-agenda--start ()
-  "Stop idle-org-agenda."
+  "Start idle-org-agenda."
   (run-with-idle-timer idle-org-agenda-interval  t 'idle-org-agenda--jump-to-agenda))
 
 (define-minor-mode idle-org-agenda-mode
