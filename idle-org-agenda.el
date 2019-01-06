@@ -37,8 +37,6 @@
 
 ;;; Code:
 
-(eval-when-compile
-  (require 'cl-libify))
 (require 'org-agenda)
 
 (defgroup idle-org nil
