@@ -1,5 +1,6 @@
 <p align="left"><a href="http://www.gnu.org/licenses/gpl-3.0.txt"><img src="https://img.shields.io/badge/license-GPL_3-green.svg" alt="License GPL 3" /></a>
-</p>
+<a href="https://melpa.org/#/idle-org-agenda"><img alt="MELPA" src="https://melpa.org/packages/idle-org-agenda-badge.svg"/></a> </p>
+
 
 # `idle-org-agenda`
 
@@ -14,9 +15,28 @@ http://article.gmane.org/gmane.emacs.orgmode/23047
 
 # Installation
 
-  Waiting for Melpa
+## MELPA
+
+  Just install the idle-org-agenda package!
+
+## Manual
+
+   Put `idle-org-agenda.el` in your load-path, and eval `(require 'idle-org-agenda')`.
+   
+## use-package
+
+   Easy try with `use-package`
+
+``` elisp
+   (use-package idle-org-agenda
+     :after org-agenda
+     :ensure t
+     :config (idle-org-agenda-mode))
+```
 
 # How it works
+
+  Run `idle-org-agenda-mode` and don't touch the keyboard. :)
 
 ![](docs/idle-org-agenda.gif)
 
@@ -41,6 +61,6 @@ You can define different agendas by using [org-agenda-custom-commands](https://o
 ```emacs-lisp
 (custom-set-variables
  '(idle-org-agenda-interval 600) ;; 10 x 60 seconds
- '(idle-org-agenda-key "gb")
+ '(idle-org-agenda-key "cb")     ;; Choose your spesific agenda
  '(idle-org-agenda-mode t))
 ```
