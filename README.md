@@ -61,6 +61,6 @@ You can define different agendas by using [org-agenda-custom-commands](https://o
 ```emacs-lisp
 (custom-set-variables
  '(idle-org-agenda-interval 600) ;; 10 x 60 seconds
- '(idle-org-agenda-key "cb")     ;; Choose your spesific agenda
+ '(idle-org-agenda-key "cb")     ;; Choose your specific agenda
  '(idle-org-agenda-mode t))
 ```
